@@ -3,7 +3,7 @@ import openai
 from dotenv import dotenv_values
 import speech_recognition as sr
 
-config = dotenv_values(".env")
+config = dotenv_values("../.env")
 openai.api_key = config.get("API_KEY")
 async def getCompletion(prompt, model="gpt-3.5-turbo"):
     print("Creating response...")
