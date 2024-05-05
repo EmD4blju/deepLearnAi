@@ -55,4 +55,12 @@ prompt = ("You will be given polish words. "
           f"{words}"
           "```")
 
-print(asyncio.run(mm.getCompletion(prompt)))
+# print(asyncio.run(mm.getCompletion(prompt)))
+
+list = [0, 123, 3,576,23, 6,3]
+print(list)
+list.sort(reverse=True)
+print(list)
+
+even_list = [item for item in list if item % 2 == 0]
+print(even_list)

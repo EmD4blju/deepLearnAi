@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 import openai
 from dotenv import dotenv_values
@@ -5,12 +6,25 @@ import speech_recognition as sr
 
 config = dotenv_values("../.env")
 openai.api_key = config.get("API_KEY")
-async def getCompletion(prompt, model="gpt-3.5-turbo"):
+async def getAsyncCompletion(prompt, model="gpt-3.5-turbo"):
     print("Creating response...")
     messages = [{"role": "user", "content": prompt}]
     response = openai.chat.completions.create(
         model=model,
         messages=messages,
+    )
+    return response.choices[0].message.content
+
+
+def getCompletion(prompt, model="gpt-3.5-turbo"):
+    return asyncio.run(getAsyncCompletion(prompt, model))
+
+
+def getCompletionFromMessages(messages, model="gpt-3.5-turbo", temperature=0.7):
+    response = openai.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature
     )
     return response.choices[0].message.content
 
